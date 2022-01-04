@@ -1,7 +1,27 @@
 #parse("base.html")
 #@mainLayout()
 <h1>Home Template</h1>
-<div>
-    <img src="img/java.jpg" />
-</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th>State</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        #foreach($t in $things)
+            <tr>
+                <td><a href="/things/$velocityCount">$velocityCount</a></td>
+                <td>$t.getTypeName()</td>
+                <td>$t.getName()</td>
+                <td>$t.getState().name()</td>
+                <td>$t.getDescription()</td>
+            </tr>
+        #end
+    </tbody>
+</table>
 #end
