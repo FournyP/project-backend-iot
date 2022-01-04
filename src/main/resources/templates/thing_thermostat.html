@@ -1,0 +1,24 @@
+#parse("base.html")
+#@mainLayout()
+<h1>Thermostat $id - $thermostat.getName()</h1>
+
+<p>
+    $message
+</p>
+
+<ul>
+    <li>Temperature range : [ $thermostat.getMinTemperature(), $thermostat.getMaxTemperature() ]</li>
+    <li>Current temperature : $thermostat.getTemperature()</li>
+</ul>
+
+<label for="temperature">New temperature</label>
+<input id="temperature" name="temperature" type="number"/>
+<button id="update-temperature">Update</button>
+
+<script type="text/javascript ">
+    document.getElementById("update-temperature").onclick = function () {
+        const temp = document.getElementById("temperature").value;
+        window.location = "/things/$id?action=set_temperature&value=" + temp;
+    }
+</script>
+#end

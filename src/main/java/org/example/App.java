@@ -6,21 +6,26 @@ import org.example.core.Conf;
 import org.example.core.Template;
 import org.example.middlewares.LoggerMiddleware;
 import org.example.models.Light;
+import org.example.models.Thermostat;
 import spark.Spark;
-
-import java.util.HashMap;
 
 public class App {
     public static void main(String[] args) {
         initialize();
 
-        HomeSystem homeSystem = HomeSystem.getInstance();
+        SystemLogger logger = new SystemLogger();
+        HomeSystem homeSystem = new HomeSystem(logger);
 
         Light light = new Light();
+        light.setName("Bedroom");
         light.setLightChangedListener(homeSystem);
         light.setLightOn(true);
 
+        Thermostat thermostat = new Thermostat(10, 30);
+        thermostat.setName("Bedroom");
+
         homeSystem.addThing(light);
+        homeSystem.addThing(thermostat);
 
         HomeSystemController homeSystemController = new HomeSystemController(homeSystem);
         ThingController thingController = new ThingController(homeSystem);
